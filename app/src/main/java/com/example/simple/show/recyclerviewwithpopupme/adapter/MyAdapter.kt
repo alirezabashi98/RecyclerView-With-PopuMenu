@@ -40,7 +40,7 @@ class MyAdapter(val context: Context, var Data: ArrayList<Model>) :
         holder.menuPopu.setOnClickListener {
 
             val popuMenu = PopupMenu(context, it)
-            popuMenu.menuInflater.inflate(R.menu.pop_menu, popuMenu.menu)
+            popuMenu.inflate(R.menu.pop_menu)
 
             popuMenu.setOnMenuItemClickListener {
                 when(it!!.itemId){
