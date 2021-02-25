@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 class MyAdapter(val context: Context, var Data: ArrayList<Model>) :
     RecyclerView.Adapter<MyAdapter.MyAdapterViewHolder>() {
 
-    lateinit var temp : Model
+    lateinit var temp: Model
 
     inner class MyAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -43,15 +43,15 @@ class MyAdapter(val context: Context, var Data: ArrayList<Model>) :
             popuMenu.inflate(R.menu.pop_menu)
 
             popuMenu.setOnMenuItemClickListener {
-                when(it!!.itemId){
+                when (it!!.itemId) {
                     R.id.popupMenu_Edit -> {
-                        Toast.makeText(context,"edit",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "edit", Toast.LENGTH_SHORT).show()
                         true
                     }
                     R.id.popupMenu_Delete -> {
-                        Toast.makeText(context,"delete",Toast.LENGTH_SHORT).show()
-                        temp = Model(Data[position].name,Data[position].image)
-                        deleteItem(position,holder.vieww,holder.mContext)
+                        Toast.makeText(context, "delete", Toast.LENGTH_SHORT).show()
+                        temp = Model(Data[position].name, Data[position].image)
+                        deleteItem(position, holder.vieww, holder.mContext)
                         true
                     }
                     else -> false
@@ -64,16 +64,18 @@ class MyAdapter(val context: Context, var Data: ArrayList<Model>) :
 
     }
 
-    private fun deleteItem(position: Int,view: View,context: Context){
+    private fun deleteItem(position: Int, view: View, context: Context) {
+
         Data.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position,Data.size)
-        Snackbar.make(view,"undo Deletion of  : ${temp.name}",Snackbar.LENGTH_LONG )
-            .setAction("UNDO"){
+        notifyItemRangeChanged(position, Data.size)
 
-                Data.add(position,temp)
+        Snackbar.make(view, "undo Deletion of  : ${temp.name}", Snackbar.LENGTH_LONG)
+            .setAction("UNDO") {
+
+                Data.add(position, temp)
                 notifyItemChanged(position)
-                notifyItemRangeChanged(position,Data.size)
+                notifyItemRangeChanged(position, Data.size)
 
             }.setActionTextColor(context.resources.getColor(android.R.color.holo_blue_dark))
             .show()
